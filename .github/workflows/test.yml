@@ -29,9 +29,10 @@ jobs:
           username: ${{secrets.GMAIL_USERNAME}}
           password: ${{secrets.GMAIL_PASSWORD}}
           subject: Message from github actions.
-          to: pablo.ntxembedded@gmail.com
-          from: Pablo Test
+          to: pablo.lee@ntxembedded.com
+          from: Github Action
           secure: true
+          body: workflow for ${{github.repository}} completed successfully!
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
