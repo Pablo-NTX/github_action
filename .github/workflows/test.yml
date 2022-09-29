@@ -22,36 +22,40 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - uses: dawidd6/action-send-mail@v3.6.0
+      - uses: dawidd6/action-send-mail@v3
         with:
+          # Required mail server address if not connection_url:
           server_address: smtp.gmail.com
+          # Server port, default 25:
           server_port: 465
-          username: ${{secrets.GMAIL_USERNAME}}
-          password: ${{secrets.GMAIL_PASSWORD}}
-          subject: Message from github actions.
-          to: pablo.lee@ntxembedded.com
-          from: Github Action
+          # Optional whether this connection use TLS (default is true if server_port is 465)
           secure: true
+          # Optional (recommended): mail server username:
+          username: ${{secrets.GMAIL_USERNAME}}
+          # Optional (recommended) mail server password (2FA passcode):
+          password: ${{secrets.GMAIL_PASSWORD}}
+          # Required mail subject:
+          subject: Message from github actions.
+          # Required recipients' addresses:
+          to: pablo.lee@ntxembedded.com
+          # Required sender full name (address can be skipped):
+          from: Github Action
+          # Optional plain body:
           body: workflow for ${{github.repository}} completed successfully!
+          # Optional HTML body read from file:
+          ##html_body: file://README.html
+          # Optional carbon copy recipients:
+          ##cc: user1@example.com, user2@example.com
+          # Optional blind carbon copy recipients:
+          bcc: pablo.ntxembedded@gmail.com
+          # Optional recipient of the email response:
+          ##reply_to: userx@example.com
+          # Optional Message ID this message is replying to:
+          ##in_reply_to: <random-user@example.com>
+          # Optional attachments:
+          ##attachments: attachments.zip,git.diff,./dist/static/*.js
+          # Optional unsigned/invalid certificates allowance:
+          ##ignore_cert: true
+          # Optional converting Markdown to HTML (set content_type to text/html too):
+          ##convert_markdown: true
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo current folder
-          pwd
-          echo ls current directory
-          ls -la
-          echo
-          echo is git install?
-          git --version
-          echo show env variables
-          export
-
-
-
-  
-  
